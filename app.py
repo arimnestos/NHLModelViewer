@@ -79,8 +79,8 @@ if df is not None:
         (df['game_date'].dt.date == tomorrow)
     ].copy()
     
-    # Sort by date
-    filtered_df = filtered_df.sort_values('game_date')
+    # Sort by date - REMOVED to preserve Excel order (which groups matchups)
+    # filtered_df = filtered_df.sort_values('game_date')
     
     # Display
     st.header(f"Games for Today & Tomorrow")
