@@ -108,6 +108,20 @@ if df is not None:
                     hide_index=True,
                     use_container_width=True
                 )
+                
+                # Add download button for today's starters
+                if game_date == today:
+                    # Create CSV export with required columns
+                    export_df = games_on_date[['game_date', 'H / A', 'Team', 'Starting Goalie']].copy()
+                    export_df.columns = ['date', 'h_a', 'team', 'goalie']
+                    export_df['date'] = export_df['date'].dt.strftime('%Y-%m-%d')
+                    
+                    st.download_button(
+                        label="📥 Download Today's Starters (CSV)",
+                        data=export_df.to_csv(index=False),
+                        file_name=f"starters_{pd.Timestamp.now().strftime('%Y-%m-%d')}.csv",
+                        mime="text/csv"
+                    )
     else:
         st.info("No games found for today or tomorrow.")
         
